@@ -15,6 +15,9 @@ const DualKey = process.env.JD_COOKIE_2;
 async function changeFile () {
    let content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
    content = content.replace(/var Key = ''/, `var Key = '${KEY}'`);
+   if (DualKey) {
+    content = content.replace(/var DualKey = ''/, `var DualKey = '${DualKey}'`);
+   }
    await fs.writeFileSync( './JD_DailyBonus.js', content, 'utf8')
 }
 
@@ -45,6 +48,10 @@ async function sendNotify (text,desp) {
 
 async function start() {
 
+  // 替换变量
+  await changeFile();
+  console.log('替换变量完毕')
+  // 执行
   await exec("node JD_DailyBonus.js >> result.txt");
   console.log('执行完毕')
 
