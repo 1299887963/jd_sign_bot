@@ -8,7 +8,7 @@ const rp = require('request-promise');
 const download = require('download');
 require('./JD_DailyBonus')
 // 公共变量
-const KEY = process.env.JD_COOKIE；
+const KEY = process.env.JD_COOKIE;
 const serverJ = process.env.PUSH_KEY;//server 酱 key
 const DualKey = process.env.JD_COOKIE_2;
 
