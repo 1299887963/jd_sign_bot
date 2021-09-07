@@ -12,6 +12,12 @@ const KEY = process.env.JD_COOKIE;
 const serverJ = process.env.PUSH_KEY;//server 酱 key
 const DualKey = process.env.JD_COOKIE_2;
 
+async function downFile () {
+    // const url = 'https://cdn.jsdelivr.net/gh/NobyDa/Script@master/JD-DailyBonus/JD_DailyBonus.js'
+    const url = 'https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js';
+    await download(url, './');
+}
+
 async function changeFile () {
    let content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
    content = content.replace(/var Key = ''/, `var Key = '${KEY}'`);
@@ -20,7 +26,6 @@ async function changeFile () {
    }
    await fs.writeFileSync( './JD_DailyBonus.js', content, 'utf8')
 }
-
 
 async function checkKey() {
   let content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
@@ -47,7 +52,13 @@ async function sendNotify (text,desp) {
 }
 
 async function start() {
-
+  if (!KEY) {
+    console.log('请填写 key 后在继续')
+    return
+  }
+  // 下载最新代码
+  //await downFile();
+  //console.log('下载代码完毕')
   // 替换变量
   //await changeFile();
   //console.log('替换变量完毕')
