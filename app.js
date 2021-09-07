@@ -8,7 +8,7 @@ const rp = require('request-promise');
 const download = require('download');
 require('./JD_DailyBonus')
 // 公共变量
-const serverJ = '';
+const serverJ = process.env.PUSH_KEY;//'';//server 酱 key
 
 
 
