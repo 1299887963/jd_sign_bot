@@ -6,11 +6,12 @@ const exec = require('child_process').execSync;
 const fs = require('fs');
 const rp = require('request-promise');
 const download = require('download');
-require('./JD_DailyBonus')
+
 // 公共变量
 const KEY = process.env.JD_COOKIE;
-const serverJ = process.env.PUSH_KEY;//server 酱 key
+const serverJ = process.env.PUSH_KEY;
 const DualKey = process.env.JD_COOKIE_2;
+
 
 async function downFile () {
     // const url = 'https://cdn.jsdelivr.net/gh/NobyDa/Script@master/JD-DailyBonus/JD_DailyBonus.js'
@@ -25,16 +26,6 @@ async function changeFile () {
     content = content.replace(/var DualKey = ''/, `var DualKey = '${DualKey}'`);
    }
    await fs.writeFileSync( './JD_DailyBonus.js', content, 'utf8')
-}
-
-async function checkKey() {
-  let content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
-  /// 如果没出现  返回 -1
-  console.log(content);
-  if (content.indexOf(/var Key = ''/) != -1) {
-    return 1;
-  }
-  return 0;
 }
 
 async function sendNotify (text,desp) {
@@ -72,14 +63,13 @@ async function start() {
     if (fs.existsSync(path)) {
       content = fs.readFileSync(path, "utf8");
     }
-    let t = content.match(/【签到概览】:((.|\n)*)【签到总计】/)
+    let t = content.match(/【签到概览】:((.|\n)*)【签到奖励】/)
     let res = t ? t[1].replace(/\n/,'') : '失败'
-    let t2 = content.match(/【签到总计】:((.|\n)*)【账号总计】/)
+    let t2 = content.match(/【签到奖励】:((.|\n)*)【其他奖励】/)
     let res2 = t2 ? t2[1].replace(/\n/,'') : '总计0'
 
     
     await sendNotify("" + ` ${res2} ` + ` ${res} ` + new Date().toLocaleDateString(), content);
-    console.log('发送通知');
   }
 }
 
