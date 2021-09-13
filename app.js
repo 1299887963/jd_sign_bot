@@ -7,6 +7,8 @@ const fs = require('fs');
 const rp = require('request-promise');
 const download = require('download');
 //require('./JD_DailyBonus_bk')
+require('./JD_DailyBonus_bk')
+
 // 公共变量
 const KEY = process.env.JD_COOKIE;
 const serverJ = process.env.PUSH_KEY;
@@ -74,4 +76,4 @@ async function start() {
   }
 }
 
-//start()
+start()
