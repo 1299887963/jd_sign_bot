@@ -56,7 +56,7 @@ async function start() {
   await changeFile();
   console.log('替换变量完毕')
   // 执行
-  await exec("node JD_DailyBonus.js >> result.txt");
+  //await exec("node JD_DailyBonus.js >> result.txt");
   //await exec("node JD_DailyBonus_bk.js >> result.txt");
   console.log('执行完毕')
 
