@@ -7,7 +7,7 @@ const fs = require('fs');
 const rp = require('request-promise');
 const download = require('download');
 //require('./JD_DailyBonus_bk')
-require('./')
+require('./JD_DailyBonus')
 
 // 公共变量
 const KEY = process.env.JD_COOKIE;
